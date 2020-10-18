@@ -1,0 +1,27 @@
+[
+    {
+        id: 0,
+        song: "Pts of Authority",
+        artist: "Linkin Park"
+    },
+    {
+        id: 1,
+        song: "Castle of Glass",
+        artist: "Linkin Park"
+    },
+    {
+        id: 2,
+        song: "La Vida Loca",
+        artist: "The Black Eyed Peas"
+    },
+    {
+        id: 3,
+        song: "Hawai",
+        artist: "Maluma"
+    },
+    {
+        id: 4,
+        song: "Con Altura",
+        artist: "Rosalia"
+    }
+]
