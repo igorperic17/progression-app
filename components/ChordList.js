@@ -7,15 +7,18 @@ import chords from '../data/chords.json'
 
 class ChordList extends React.Component {
     render() {
-        console
         return (
             <FlatList style={[styles.container, this.props.style]} 
             data={chords}
-            renderItem={ChordListItem}
+            renderItem={ (listItem) => {
+            return (
+                <ChordListItem item={listItem.item} 
+                    onPress={() => { this.props.navigation.navigate("SongScreen", { songObject: listItem.item })}} />
+            )}
+            }
             ></FlatList>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
       flex: 1,
       margin: 20,
       flexDirection: 'column',
-      borderRadius: 20,
+      borderRadius: 25,
       borderColor: 'black',
       borderWidth: 1,
     },

@@ -2,26 +2,31 @@
     {
         id: 0,
         song: "Pts of Authority",
-        artist: "Linkin Park"
+        artist: "Linkin Park",
+        chords: "Em Em B B"
     },
     {
         id: 1,
         song: "Castle of Glass",
-        artist: "Linkin Park"
+        artist: "Linkin Park",
+        chords: "A A Cm B Cm Cm"
     },
     {
         id: 2,
         song: "La Vida Loca",
-        artist: "The Black Eyed Peas"
+        artist: "The Black Eyed Peas",
+        chords: "D D D Em D Em B Am B"
     },
     {
         id: 3,
         song: "Hawai",
-        artist: "Maluma"
+        artist: "Maluma",
+        chords: "Em Am"
     },
     {
         id: 4,
         song: "Con Altura",
-        artist: "Rosalia"
+        artist: "Rosalia",
+        chords: "Dm Am Em E E E E E E E E E E E"
     }
 ]
