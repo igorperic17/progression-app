@@ -13,7 +13,9 @@ class ChordList extends React.Component {
             renderItem={ (listItem) => {
             return (
                 <ChordListItem item={listItem.item} 
-                    onPress={() => { this.props.navigation.navigate("SongScreen", { songObject: listItem.item })}} />
+                    onPress={() => { 
+                        this.props.navigation.navigate("SongScreen", 
+                        { songObject: listItem.item })}} />
             )}
             }
             ></FlatList>
