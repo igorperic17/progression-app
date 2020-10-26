@@ -13,7 +13,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Navigator>
-        <Screen name="ChordList" options={{title: 'Chords'}} component={ChordList}></Screen>
+        <Screen name="ChordList" options={{title: 'Song List'}} component={ChordList}></Screen>
         <Screen name="SongScreen" options={{title: 'Chords'}} component={SongScreen}></Screen>
       </Navigator>
     </NavigationContainer>

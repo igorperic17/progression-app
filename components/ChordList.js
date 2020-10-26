@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
       margin: 20,
       flexDirection: 'column',
       borderRadius: 25,
-      borderColor: 'black',
-      borderWidth: 1,
+      borderColor: 'rgba(0,100,200,0.7)',
+      borderWidth: 2,
     },
   });
 
