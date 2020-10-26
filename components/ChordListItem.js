@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         margin: 10,
-        backgroundColor: 'rgba(0,100,0,.3)',
-        borderColor: 'rgba(0,100,0,.7)',
+        backgroundColor: 'rgba(0,100,200,.3)',
+        borderColor: 'rgba(0,100,200,.7)',
         borderRadius: 25,
         borderWidth: 2
     },
