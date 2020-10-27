@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import { View, FlatList, Button, StyleSheet, TouchableHighlight, Image } from 'react-native';
 
 import ChordListItem from '../components/ChordListItem'
 import LogoImage from '../components/LogoImage'
@@ -48,6 +47,16 @@ class ChordList extends React.Component {
                 )}
                 }
                 ></FlatList>
+                <View style={styles.bottomBar}>
+                    {/* ADD SONG BUTTON */}
+                    <TouchableHighlight>
+                        <Image style={styles.bottomBarButton} source={require('../media/add-button.png')}></Image>
+                    </TouchableHighlight>
+                    {/* SONG FILTER BUTTON */}
+                    <TouchableHighlight>
+                        <Image style={styles.bottomBarButton} source={require('../media/filter-button.png')}></Image>
+                    </TouchableHighlight>
+                </View>
             </View>
         )
     }
@@ -70,6 +79,20 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       backgroundColor: 'white'
     },
+    bottomBar: {
+        // flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 50,
+        // padding: 10
+    },
+    bottomBarButton: {
+        height: 25,
+        width: 150,
+        resizeMode: 'contain',
+        margin: 5
+    }
   });
 
 export { ChordList };
