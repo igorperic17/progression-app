@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native';
 
-export default function HomeScreen({ route }) {
+export default function LogoImage({ route }) {
     return (
         <View style={styles.container}>
             <Image source={require('../media/logo.png')} style={styles.logo}></Image>
@@ -11,7 +11,7 @@ export default function HomeScreen({ route }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white'
@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
     logo: {
         resizeMode: 'contain',
         width: 300,
-        height: 70
+        height: 80
     }
 })

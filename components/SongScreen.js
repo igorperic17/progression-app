@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, ScrollView} from 'react-native'
-
+import LogoImage from '../components/LogoImage'
 
 function SongScreen({ route }) {
     const { songObject } = route.params;
@@ -8,6 +8,7 @@ function SongScreen({ route }) {
         <View style={styles.container}>
             <Text style={styles.songTitle}>{songObject.song}</Text>
             <Text style={styles.artistName}>{songObject.artist}</Text>
+            <LogoImage></LogoImage>
             <ScrollView style={styles.chordsScrollView}>
                 <Text style={styles.chordsTextStyle}>{songObject.chords}</Text>
             </ScrollView>
@@ -22,7 +23,8 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'space-evenly',
         padding: 10,
-        backgroundColor: 'rgba(0,100,200,0.05)',
+        // backgroundColor: 'rgba(0,100,200,0.05)',
+        backgroundColor: 'white',
     },
     chordsScrollView: {
         flex: 1,
