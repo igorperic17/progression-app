@@ -49,7 +49,7 @@ class ChordList extends React.Component {
                 ></FlatList>
                 <View style={styles.bottomBar}>
                     {/* ADD SONG BUTTON */}
-                    <TouchableHighlight>
+                    <TouchableHighlight onPress={ () => { console.log('Add song pressed!') }}>
                         <Image style={styles.bottomBarButton} source={require('../media/add-button.png')}></Image>
                     </TouchableHighlight>
                     {/* SONG FILTER BUTTON */}
