@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 export default function ChordListItem({ item, onPress }) {
     return (
         <TouchableOpacity key={ item.id } style={styles.container} onPress={onPress}>
-            <Text style={styles.songTitle}>{item.song}</Text>
+            <Text style={styles.songTitle}>{item.title}</Text>
             <Text style={styles.artistName}>{item.artist}</Text>
         </TouchableOpacity>
     )

@@ -5,15 +5,40 @@ import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import ChordListItem from '../components/ChordListItem'
 import LogoImage from '../components/LogoImage'
 
-import chords from '../data/chords.json'
+// STATIC DATA
+// import chords from '../data/chords.json'
 
 class ChordList extends React.Component {
+
+    constructor() {
+        super();
+        this.state = { };
+        this.getRemoteData();
+    }
+
+    // DYNAMIC DATA
+    getRemoteData = () => {
+        const url = "http://localhost:3000/song";
+        fetch(url)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+            this.setState({
+                chords: res
+            });
+            })
+            .catch(error => {
+            console.log("get data error from:" + url + " error:" + error);
+            });
+        };
+    
+    
     render() {
         return (
             <View style={styles.container}>
                 <LogoImage></LogoImage>
                 <FlatList style={[styles.list, this.props.style]} 
-                data={chords}
+                data={this.state.chords}
                 renderItem={ (listItem) => {
                 return (
                     <ChordListItem item={listItem.item} 
