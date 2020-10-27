@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, ScrollView} from 'react-native'
 
 
-export default function SongScreen({ route }) {
+function SongScreen({ route }) {
     const { songObject } = route.params;
     return (
         <View style={styles.container}>
@@ -52,3 +52,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 });
+
+export { SongScreen }
