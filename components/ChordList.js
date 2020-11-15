@@ -47,16 +47,14 @@ class ChordList extends React.Component {
                 )}
                 }
                 ></FlatList>
-                <View style={styles.bottomBar}>
-                    {/* ADD SONG BUTTON */}
+                {/* <View style={styles.bottomBar}>
                     <TouchableHighlight onPress={ () => { console.log('Add song pressed!') }}>
                         <Image style={styles.bottomBarButton} source={require('../media/add-button.png')}></Image>
                     </TouchableHighlight>
-                    {/* SONG FILTER BUTTON */}
                     <TouchableHighlight>
                         <Image style={styles.bottomBarButton} source={require('../media/filter-button.png')}></Image>
                     </TouchableHighlight>
-                </View>
+                </View> */}
             </View>
         )
     }
@@ -67,17 +65,18 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'stretch',
-        justifyContent: 'flex-end',
-        backgroundColor: 'white'
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        alignItems: 'center'
     },
     list: {
       flex: 1,
-      margin: 20,
+      width: '90%',
       flexDirection: 'column',
-      borderRadius: 25,
-      borderColor: 'rgba(0,100,200,0.7)',
-      borderWidth: 2,
-      backgroundColor: 'white'
+    //   borderRadius: 25,
+    //   borderColor: 'rgba(0,100,200,0.7)',
+    //   borderWidth: 2,
+      backgroundColor: 'white',
     },
     bottomBar: {
         // flex: 1,

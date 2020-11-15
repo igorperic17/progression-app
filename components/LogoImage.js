@@ -5,6 +5,7 @@ export default function LogoImage({ route }) {
     return (
         <View style={styles.container}>
             <Image source={require('../media/logo.png')} style={styles.logo}></Image>
+            <View style={ styles.horizontalLine }></View>
         </View>
     );
 };
@@ -14,11 +15,18 @@ const styles = StyleSheet.create({
         // flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginTop: 40
     },
     logo: {
         resizeMode: 'contain',
         width: 300,
-        height: 80
+        height: 50
+    },
+    horizontalLine: {
+        backgroundColor: '#3D79B4',
+        width: '90%',
+        height: 1,
+        marginTop: 10,
     }
 })
