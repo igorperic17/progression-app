@@ -17,6 +17,7 @@ export default function App() {
         {/* <Screen name="HomeScreen" options={{title: 'Home'}} component={HomeScreen}></Screen> */}
         <Screen name="ChordList" options={{title: 'Song List'}} component={ChordList}></Screen>
         <Screen name="SongScreen" options={{title: 'Chords'}} component={SongScreen}></Screen>
+        <Screen name="AddSongScreen" options={{title: 'Add song'}} component={ChordList}></Screen>
       </Navigator>
     </NavigationContainer>
   );
