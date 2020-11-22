@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, FlatList, Button, StyleSheet, TouchableHighlight, Image } from 'react-native';
 
-import ChordListItem from '../components/ChordListItem'
-import LogoImage from '../components/LogoImage'
+import SongListScreenCell from './SongListScreenCell'
+import LogoImage from './LogoImage'
+import BottomBarNavigation from './BottomBarNavigation'
 
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { gql } from '@apollo/client';
@@ -10,7 +11,7 @@ import { gql } from '@apollo/client';
 // STATIC DATA
 // import chords from '../data/chords.json'
 
-class ChordList extends React.Component {
+class SongListScreen extends React.Component {
 
     constructor() {
         super();
@@ -46,35 +47,27 @@ class ChordList extends React.Component {
             });
             console.log(result);
         });
-
-        // const url = "http://localhost:3000/song";
-        // fetch(url)
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(error => {
-        //     console.log("get data error from:" + url + " error:" + error);
-        //     });
-        // };
     };
     
     
     render() {
         return (
+            <>
             <View style={styles.container}>
                 <LogoImage></LogoImage>
                 <FlatList style={[styles.list, this.props.style]} 
                 data={this.state.chords}
                 renderItem={ (listItem) => {
                 return (
-                    <ChordListItem item={listItem.item} 
+                    <SongListScreenCell item={listItem.item} 
                         onPress={() => { 
                             this.props.navigation.navigate("SongScreen", 
                             { songObject: listItem.item })}} />
                 )}
                 }
                 ></FlatList>
+                
+
                 {/* <View style={styles.bottomBar}>
                     <TouchableHighlight onPress={ () => { console.log('Add song pressed!') }}>
                         <Image style={styles.bottomBarButton} source={require('../media/add-button.png')}></Image>
@@ -84,6 +77,10 @@ class ChordList extends React.Component {
                     </TouchableHighlight>
                 </View> */}
             </View>
+            <View style={styles.bottomBarContainer}>
+                <BottomBarNavigation style={styles.bottomBar}></BottomBarNavigation>
+            </View>
+            </>
         )
     }
 }
@@ -95,7 +92,11 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'center',
         backgroundColor: 'white',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        zIndex: 0
     },
     list: {
       flex: 1,
@@ -105,21 +106,26 @@ const styles = StyleSheet.create({
     //   borderColor: 'rgba(0,100,200,0.7)',
     //   borderWidth: 2,
       backgroundColor: 'white',
+      height: '100%',
+      zIndex: 1
     },
-    bottomBar: {
-        // flex: 1,
-        flexDirection: 'row',
+    bottomBarContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 50,
-        // padding: 10
+        // height: 60,
+        bottom: 40,
+        zIndex: 2,
+        // paddingBottom: 20,
+        // backgroundColor: 'red',
+        width: '100%'
     },
-    bottomBarButton: {
-        height: 25,
-        width: 150,
-        resizeMode: 'contain',
-        margin: 5
+    bottomBar: {
+        // height: 60,
+        // zIndex: 3,
     }
   });
 
-export { ChordList };
+export { SongListScreen };

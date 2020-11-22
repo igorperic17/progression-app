@@ -1,14 +1,18 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
-export default function ChordListItem({ item, onPress }) {
+export default function SongListScreenCell({ item, onPress }) {
     function getChordViews() {
         var a = item.progression;
         // console.log(a);
         if (a != null) {
             const chordProgression = a.split(',');
             const chordViews = chordProgression.map( (chord) => {
-                return (<View style={ styles.chordBubbleContainer}><Text style={styles.chordBubbleText}>{chord}</Text></View>);
+                return (
+                <View key={chord} style={styles.chordBubbleContainer}>
+                    <Text style={styles.chordBubbleText}>{chord}</Text>
+                </View>
+                );
             });
             return chordViews;
         };
@@ -16,7 +20,7 @@ export default function ChordListItem({ item, onPress }) {
     }
 
     return (
-        <TouchableOpacity key={ String(item.id) } style={styles.container} onPress={onPress}>
+        <TouchableOpacity key={ item.id } style={styles.container} onPress={onPress}>
 
             {/* chords - cell header */}
             <View style={styles.cellHeader}> 
