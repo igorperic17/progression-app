@@ -4,6 +4,9 @@ import { View, FlatList, Button, StyleSheet, TouchableHighlight, Image } from 'r
 import ChordListItem from '../components/ChordListItem'
 import LogoImage from '../components/LogoImage'
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { gql } from '@apollo/client';
+
 // STATIC DATA
 // import chords from '../data/chords.json'
 
@@ -17,19 +20,44 @@ class ChordList extends React.Component {
 
     // DYNAMIC DATA
     getRemoteData = () => {
-        const url = "http://localhost:3000/song";
-        fetch(url)
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
+
+
+        const client = new ApolloClient({
+          uri: 'http://localhost:3000/graphql',
+          cache: new InMemoryCache()
+        });
+
+        client.query({
+            query: gql`
+            query {
+                songs {
+                    id
+                    title
+                    artist
+                    chords
+                    progression
+                }
+            }
+            `
+        })
+        .then(result => {
             this.setState({
-                chords: res
+                chords: result.data.songs
             });
-            })
-            .catch(error => {
-            console.log("get data error from:" + url + " error:" + error);
-            });
-        };
+            console.log(result);
+        });
+
+        // const url = "http://localhost:3000/song";
+        // fetch(url)
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(error => {
+        //     console.log("get data error from:" + url + " error:" + error);
+        //     });
+        // };
+    };
     
     
     render() {
