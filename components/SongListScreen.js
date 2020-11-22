@@ -3,13 +3,9 @@ import { View, FlatList, Button, StyleSheet, TouchableHighlight, Image } from 'r
 
 import SongListScreenCell from './SongListScreenCell'
 import LogoImage from './LogoImage'
-import BottomBarNavigation from './BottomBarNavigation'
 
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { gql } from '@apollo/client';
-
-// STATIC DATA
-// import chords from '../data/chords.json'
 
 class SongListScreen extends React.Component {
 
@@ -21,8 +17,6 @@ class SongListScreen extends React.Component {
 
     // DYNAMIC DATA
     getRemoteData = () => {
-
-
         const client = new ApolloClient({
           uri: 'http://localhost:3000/graphql',
           cache: new InMemoryCache()
@@ -49,7 +43,6 @@ class SongListScreen extends React.Component {
         });
     };
     
-    
     render() {
         return (
             <>
@@ -66,19 +59,6 @@ class SongListScreen extends React.Component {
                 )}
                 }
                 ></FlatList>
-                
-
-                {/* <View style={styles.bottomBar}>
-                    <TouchableHighlight onPress={ () => { console.log('Add song pressed!') }}>
-                        <Image style={styles.bottomBarButton} source={require('../media/add-button.png')}></Image>
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <Image style={styles.bottomBarButton} source={require('../media/filter-button.png')}></Image>
-                    </TouchableHighlight>
-                </View> */}
-            </View>
-            <View style={styles.bottomBarContainer}>
-                <BottomBarNavigation style={styles.bottomBar}></BottomBarNavigation>
             </View>
             </>
         )
@@ -108,23 +88,6 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       height: '100%',
       zIndex: 1
-    },
-    bottomBarContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-        // height: 60,
-        bottom: 40,
-        zIndex: 2,
-        // paddingBottom: 20,
-        // backgroundColor: 'red',
-        width: '100%'
-    },
-    bottomBar: {
-        // height: 60,
-        // zIndex: 3,
     }
   });
 

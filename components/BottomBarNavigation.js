@@ -7,7 +7,6 @@ export default class BottomBarNavigation extends React.Component {
 
     constructor(props) {
         super(props);
-        this.selectedButton = 1;
         this.highlightCircleRef = React.createRef();
         this.state = {
             highlightPosition: new Animated.Value(0)
@@ -21,16 +20,24 @@ export default class BottomBarNavigation extends React.Component {
             easing: Easing.bounce,
             useNativeDriver: true
         }).start();
+
+        // delegate the call to the screen
+        this.props.delegate.didPressNavigationButton(index);
+    }
+
+    componentDidMount() {
+        // default screen is song list
+        this.navigationButtonPressed(3);
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={[styles.navigationBar, this.props.style]}> 
-                    <BottomBarNavigationButton index="1" text='Add' delegate={this}/>
-                    <BottomBarNavigationButton index="2" text='List' delegate={this}/>
-                    <BottomBarNavigationButton index="3" text='Play' delegate={this}/>
-                    <BottomBarNavigationButton index="4" text='-' delegate={this}/>
+                    <BottomBarNavigationButton index="1" text='Play' delegate={this}/>
+                    <BottomBarNavigationButton index="2" text='Add' delegate={this}/>
+                    <BottomBarNavigationButton index="3" text='List' delegate={this}/>
+                    <BottomBarNavigationButton index="4" text='Sett' delegate={this}/>
                 </View>
 
                 <Animated.View 
@@ -63,7 +70,8 @@ const styles = StyleSheet.create({
     navigationBar: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: 'rgba(0,0,0,.3)',
+        backgroundColor: '#081018',
+        opacity: .7,
         height: 60,
         // width: 236,
         borderRadius: 35,

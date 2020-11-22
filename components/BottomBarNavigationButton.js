@@ -10,9 +10,8 @@ export default class BottomBarNavigationButton extends React.Component {
                 key={this.props.index} 
                 style={[styles.contaner, this.props.style]} 
                 onPress={() => this.props.delegate.navigationButtonPressed(this.props.index)}>
-                {/* onPress={this.props.onPress}> */}
                 <View>
-                    <Text>{this.props.text}</Text>
+                    <Text style={{color: 'white'}}>{this.props.text}</Text>
                 </View>
             </TouchableHighlight>
         );
@@ -22,7 +21,7 @@ export default class BottomBarNavigationButton extends React.Component {
 const styles = StyleSheet.create({
     contaner: {
         borderRadius: 30,
-        backgroundColor: 'rgba(0,0,0,.1)',
+        backgroundColor: 'rgba(0,0,0,.3)',
         height: 50,
         width: 50,
         alignItems: 'center',
