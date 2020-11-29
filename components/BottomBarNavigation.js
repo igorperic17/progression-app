@@ -11,26 +11,38 @@ export default class BottomBarNavigation extends React.Component {
         super(props);
         this.highlightCircleRef = React.createRef();
         this.highlightPosition = new Animated.Value(0)
-        this.currentIndex = null;
+        this.state = {
+            currentIndex: -1
+        }
     }
-    navigationButtonPressed(index) {
-        if (index == this.currentIndex) return;
-        this.currentIndex = index;
 
-        Animated.timing(this.highlightPosition, {
-            toValue: (index - 1) * 57,
-            duration: 300,
-            easing: Easing.bounce,
-            useNativeDriver: true
-        }).start();
+    navigationButtonPressed(index) {
+        if (index === this.state.currentIndex) return;
+        this.setState({ currentIndex: index });
 
         // delegate the call to the screen
         this.props.delegate?.didPressNavigationButton(index);
     }
 
+    componentDidUpdate(prevProps) {
+        console.log("UPDATEEEE")
+        // if (this.currentIndex !== prevProps.currentIndex) {
+            this.onPageChange(this.state.currentIndex);
+        // }
+    }
+
+    onPageChange(newPageIndex) {
+        Animated.timing(this.highlightPosition, {
+            toValue: (newPageIndex - 1) * 57,
+            duration: 300,
+            easing: Easing.bounce,
+            useNativeDriver: true
+        }).start();
+    }
+
     componentDidMount() {
         // default screen is song list
-        this.navigationButtonPressed(3);
+        this.navigationButtonPressed(2);
     }
 
     render() {
@@ -47,8 +59,7 @@ export default class BottomBarNavigation extends React.Component {
                     ref={this.highlightCircleRef} 
                     style={[ 
                         styles.highlightCircle, 
-                        { 
-                            // marginLeft: this.highlightPosition
+                        {
                             transform: [
                                 {
                                     translateX: this.highlightPosition

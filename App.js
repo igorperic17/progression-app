@@ -5,11 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { SongListScreen } from './components/SongListScreen';
+import { AddSongScreen } from './components/AddSongScreen';
 import { SongScreen } from './components/SongScreen';
 import HomeScreen from './components/LogoImage';
 import BottomBarNavigation from './components/BottomBarNavigation';
-
-// import { song } from '../progression-backend/src/models/song.ts';
 
 import { navigationRef, isReadyRef } from './components/NavigationRoot';
 import * as NavigationRoot from './components/NavigationRoot';
@@ -27,6 +26,7 @@ export default class App extends Component {
       artist: 'igor'
     };
     isReadyRef.current = false;
+    
   };
 
   didPressNavigationButton(index) {
@@ -43,6 +43,7 @@ export default class App extends Component {
     } else if (index == 4) {
         // TODO: add settings screen
     }
+
   }
 
   render() {
@@ -52,15 +53,15 @@ export default class App extends Component {
       <NavigationContainer ref={ navigationRef } onReady={ () => isReadyRef.current = true }>
         <Navigator screenOptions={{ headerShown: false }}>
           {/* <Screen name="HomeScreen" options={{title: 'Home'}} component={HomeScreen}></Screen> */}
+          <Screen name="AddSongScreen" options={{title: 'Add song'}} component={AddSongScreen}></Screen>
           <Screen name="SongListScreen" options={{title: 'Song List'}} component={SongListScreen}></Screen>
           <Screen name="SongScreen" options={{title: 'Chords'}} component={SongScreen}></Screen>
-          <Screen name="AddSongScreen" options={{title: 'Add song'}} component={SongListScreen}></Screen>
         </Navigator>
       </NavigationContainer>
 
-      <View style={styles.bottomBarContainer}>
-        <BottomBarNavigation style={styles.bottomBar} delegate={this}></BottomBarNavigation>
-      </View>
+        <View style={styles.bottomBarContainer}>
+          <BottomBarNavigation ref={this.navBar} style={styles.bottomBar} delegate={this}></BottomBarNavigation>
+        </View>
       </>
     )
   }

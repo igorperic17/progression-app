@@ -1,7 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
-export default function SongListScreenCell({ item, onPress }) {
+export default function SongListScreenCell({cellStyle, item, onPress }) {
+
     function getChordViews() {
         var a = item.progression;
         // console.log(a);
@@ -20,7 +21,7 @@ export default function SongListScreenCell({ item, onPress }) {
     }
 
     return (
-        <TouchableOpacity key={ item.id } style={styles.container} onPress={onPress}>
+        <TouchableOpacity key={ item.id } style={[styles.container, cellStyle]} onPress={onPress}>
 
             {/* chords - cell header */}
             <View style={styles.cellHeader}> 
@@ -41,7 +42,10 @@ export default function SongListScreenCell({ item, onPress }) {
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
+        alignContent: 'flex-start',
+        justifyContent: 'flex-start',
+        width: '100%'
     },
     cellHeader: {
         height: 30,
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginLeft: 20,
         marginBottom: -30,
+        position: 'absolute',
         zIndex: 1
     },
     chordBubbleContainer: {
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
         color: '#3D79B4'
     },
     cell: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         flexDirection: 'column',
         alignItems: 'center',

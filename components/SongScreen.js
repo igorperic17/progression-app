@@ -12,16 +12,6 @@ function SongScreen({ route }) {
             <ScrollView style={styles.chordsScrollView}>
                 <Text style={styles.chordsTextStyle}>{songObject.chords}</Text>
             </ScrollView>
-            <View style={styles.bottomBar}>
-                    {/* EDIT SONG BUTTON */}
-                    <TouchableHighlight style={{padding: 5}}>
-                        <Image style={styles.bottomBarButton} source={require('../media/edit-button.png')}></Image>
-                    </TouchableHighlight>
-                    {/* DELETE FILTER BUTTON */}
-                    <TouchableHighlight>
-                        <Image style={styles.bottomBarButton} source={require('../media/delete-button.png')}></Image>
-                    </TouchableHighlight>
-            </View>
         </View>
     );
 }
