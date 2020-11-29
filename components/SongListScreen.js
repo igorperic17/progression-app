@@ -39,7 +39,7 @@ class SongListScreen extends React.Component {
             this.setState({
                 chords: result.data.songs
             });
-            console.log(result);
+            // console.log(result);
         });
     };
     

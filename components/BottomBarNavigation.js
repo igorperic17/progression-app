@@ -3,18 +3,21 @@ import { Animated, View, Easing, Image, StyleSheet, TouchableHighlight } from 'r
 // import Animated from 'react-native-reanimated';
 import BottomBarNavigationButton from './BottomBarNavigationButton'
 
+import * as NavigationRoot from './NavigationRoot';
+
 export default class BottomBarNavigation extends React.Component {
 
     constructor(props) {
         super(props);
         this.highlightCircleRef = React.createRef();
-        this.state = {
-            highlightPosition: new Animated.Value(0)
-        };
+        this.highlightPosition = new Animated.Value(0)
+        this.currentIndex = null;
     }
     navigationButtonPressed(index) {
-        this.selectedButton = index;
-        Animated.timing(this.state.highlightPosition, {
+        if (index == this.currentIndex) return;
+        this.currentIndex = index;
+
+        Animated.timing(this.highlightPosition, {
             toValue: (index - 1) * 57,
             duration: 300,
             easing: Easing.bounce,
@@ -22,7 +25,7 @@ export default class BottomBarNavigation extends React.Component {
         }).start();
 
         // delegate the call to the screen
-        this.props.delegate.didPressNavigationButton(index);
+        this.props.delegate?.didPressNavigationButton(index);
     }
 
     componentDidMount() {
@@ -48,7 +51,7 @@ export default class BottomBarNavigation extends React.Component {
                             // marginLeft: this.highlightPosition
                             transform: [
                                 {
-                                    translateX: this.state.highlightPosition
+                                    translateX: this.highlightPosition
                                 }
                             ]
                         }

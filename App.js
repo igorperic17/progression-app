@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,30 +9,37 @@ import { SongScreen } from './components/SongScreen';
 import HomeScreen from './components/LogoImage';
 import BottomBarNavigation from './components/BottomBarNavigation';
 
-import { navigationRef } from './components/NavigationRoot';
+// import { song } from '../progression-backend/src/models/song.ts';
+
+import { navigationRef, isReadyRef } from './components/NavigationRoot';
 import * as NavigationRoot from './components/NavigationRoot';
 
 const { Navigator, Screen } = createStackNavigator();
 
 export default class App extends Component {
 
-  // navigationRef = React.useRef(null);
-
   constructor(props) {
     super(props);
-  }
+    this.currentSong = {
+      title: 'Test',
+      chords: 'test',
+      progression: 'A,B,C',
+      artist: 'igor'
+    };
+    isReadyRef.current = false;
+  };
 
   didPressNavigationButton(index) {
-    console.log('BUTTON ' + String(index));
+
+    // skip navigation if it is not mounted already
+    if (!navigationRef.current || !isReadyRef.current) return;
+
     if (index == 1) {
-      console.log("WOHOOOOO 1");
-      navigationRef.current?.navigate('SongScreen');
+      navigationRef.current?.navigate('SongScreen', { songObject: this.currentSong } );
     } else if (index == 2) {
-      console.log("WOHOOOOO 2");
       navigationRef.current?.navigate('AddSongScreen');
     } else if (index == 3) {
-      console.log("WOHOOOOO 3");
-      NavigationRoot.navigate('SongListScreen');
+      navigationRef.current?.navigate('SongListScreen');
     } else if (index == 4) {
         // TODO: add settings screen
     }
@@ -41,8 +48,9 @@ export default class App extends Component {
   render() {
     return (
       <>
-      <NavigationContainer>
-        <Navigator ref={navigationRef} screenOptions={{ headerShown: false }}>
+      {/* <NavigationContainer ref={ (nav) => this.setNavigationRef(nav) }> */}
+      <NavigationContainer ref={ navigationRef } onReady={ () => isReadyRef.current = true }>
+        <Navigator screenOptions={{ headerShown: false }}>
           {/* <Screen name="HomeScreen" options={{title: 'Home'}} component={HomeScreen}></Screen> */}
           <Screen name="SongListScreen" options={{title: 'Song List'}} component={SongListScreen}></Screen>
           <Screen name="SongScreen" options={{title: 'Chords'}} component={SongScreen}></Screen>
@@ -51,7 +59,7 @@ export default class App extends Component {
       </NavigationContainer>
 
       <View style={styles.bottomBarContainer}>
-      <BottomBarNavigation style={styles.bottomBar} delegate={this}></BottomBarNavigation>
+        <BottomBarNavigation style={styles.bottomBar} delegate={this}></BottomBarNavigation>
       </View>
       </>
     )
