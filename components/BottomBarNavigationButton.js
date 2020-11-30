@@ -10,8 +10,9 @@ export default class BottomBarNavigationButton extends React.Component {
                 key={this.props.index} 
                 style={[styles.contaner, this.props.style]} 
                 onPress={() => this.props.delegate.navigationButtonPressed(this.props.index)}>
-                <View>
-                    <Text style={{color: 'white'}}>{this.props.text}</Text>
+                <View style={styles.buttonImage}>
+                    <Image source={this.props.image}></Image>
+                    {/* <Text style={{color: 'white'}}>{this.props.text}</Text> */}
                 </View>
             </TouchableHighlight>
         );
@@ -28,5 +29,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginLeft: 4,
         marginRight: 4
+    },
+    buttonImage: {
+        alignContent: 'center',
+        justifyContent: 'center'
+        // width: '100%',
+        // height: '100%'
     }
 });

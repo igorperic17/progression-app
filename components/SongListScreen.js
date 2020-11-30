@@ -18,7 +18,7 @@ class SongListScreen extends React.Component {
     // DYNAMIC DATA
     getRemoteData = () => {
         const client = new ApolloClient({
-          uri: 'http://localhost:3000/graphql',
+          uri: 'http://23.23.23.102:3000/graphql',
           cache: new InMemoryCache()
         });
 

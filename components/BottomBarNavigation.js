@@ -48,28 +48,27 @@ export default class BottomBarNavigation extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={[styles.navigationBar, this.props.style]}> 
-                    <BottomBarNavigationButton index="1" text='Play' delegate={this}/>
-                    <BottomBarNavigationButton index="2" text='Add' delegate={this}/>
-                    <BottomBarNavigationButton index="3" text='List' delegate={this}/>
-                    <BottomBarNavigationButton index="4" text='Sett' delegate={this}/>
-                </View>
-
                 <Animated.View 
-                    ref={this.highlightCircleRef} 
-                    style={[ 
-                        styles.highlightCircle, 
-                        {
-                            transform: [
-                                {
-                                    translateX: this.highlightPosition
-                                }
-                            ]
-                        }
-                        ] 
+                        ref={this.highlightCircleRef} 
+                        style={[ 
+                            styles.highlightCircle, 
+                            { 
+                                transform: [
+                                    {
+                                        translateX: this.highlightPosition
+                                    }
+                                ]
+                            }
+                            ] 
                         }>
-
-                    </Animated.View>
+                </Animated.View>
+                    
+                <View style={[styles.navigationBar, this.props.style]}> 
+                    <BottomBarNavigationButton index="1" text='' image={require('../assets/navbar-play.png')} delegate={this}/>
+                    <BottomBarNavigationButton index="2" text='' image={require('../assets/navbar-edit.png')} delegate={this}/>
+                    <BottomBarNavigationButton index="3" text='' image={require('../assets/navbar-list.png')} delegate={this}/>
+                    <BottomBarNavigationButton index="4" text='' image={require('../assets/navbar-settings.png')} delegate={this}/>
+                </View>
             </View>
         );
     }
