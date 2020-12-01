@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'flex-start',
         justifyContent: 'flex-start',
-        width: '100%'
+        width: '100%',
+        backgroundColor: 'white'
     },
     cellHeader: {
         height: 30,
