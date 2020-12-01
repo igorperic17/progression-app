@@ -10,14 +10,21 @@ import { navigationRef } from './NavigationRoot';
 import { GlobalColors } from '../styles/global.styles'
 import { LinearGradient } from 'expo-linear-gradient'
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { gql } from '@apollo/client';
+
 class AddSongScreen extends React.Component {
 
     constructor({ navigator }) {
         super();
         this.state = { 
-            song: new Song({id: '1', title: '-', artist: '-', chords: '-', progression: ''})
+            song: new Song({id: '1', title: '', artist: '', chords: '', progression: ''})
         };
-        // this.getRemoteData();
+        
+        this.client = new ApolloClient({
+            uri: 'http://localhost:3000/graphql',
+            cache: new InMemoryCache()
+          });
 
         this.navigator = navigator
     }
@@ -27,8 +34,23 @@ class AddSongScreen extends React.Component {
         this.navigator.goBack();
     }
 
-    onOKPress() {
-        console.log("OK PRESSED")
+    onOKPress(song) {
+        console.log("Adding a song")
+        console.log(song);
+    
+        const queryString = `
+        mutation {
+            createNewSong(artist: "${song.artist}", title: "${song.title}", chords: """${song.chords}""", progression: "${song.progression}") {
+                id
+            }
+        }`;
+        console.log(queryString);
+
+        this.client.mutate({
+            mutation: gql(queryString)
+        }).then(result => {
+            console.log(result);
+        });
     }
     
     render() {
@@ -50,22 +72,22 @@ class AddSongScreen extends React.Component {
                
 
                 <Text style={styles.inputFieldLabel}>Chords</Text>
-                <TextInput style={[styles.inputField, 
-                    { height: 250, textAlign: 'center', textAlignVertical: 'top'}]}
+                <TextInput multiline style={[styles.inputField, 
+                    { padding: 10, height: 250, textAlign: 'left', textAlignVertical: 'top'}]}
                     onChangeText={ (text) => this.setState({ song: { ...this.state.song, chords: text }})}>
                         {this.state.song.chords}
                     </TextInput>
 
                 <View style={styles.buttonRow}>
                     {/* cancel button */}
-                    <TouchableHighlight style={[ styles.button, {left: 0} ]} onPress={this.onCancelPress}>
+                    <TouchableHighlight style={[ styles.button, {left: 0} ]} onPress={() => this.onCancelPress}>
                         <LinearGradient colors={['#EC8D40', '#D5541E']} style={styles.button}>
                             <Image source={require('../assets/button-x.png')} style={styles.buttonImage}></Image>
                         </LinearGradient>
                     </TouchableHighlight>
 
                     {/* cancel button */}
-                    <TouchableHighlight style={[ styles.button, {right: 0} ]} onPress={this.onOKPress}>
+                    <TouchableHighlight style={[ styles.button, {right: 0} ]} onPress={() => this.onOKPress(this.state.song)}>
                         <LinearGradient colors={[GlobalColors.darkBlue, GlobalColors.darkBlue]} style={styles.button}>
                             <Image source={require('../assets/button-tick.png')} style={styles.buttonImage}></Image>
                         </LinearGradient>
