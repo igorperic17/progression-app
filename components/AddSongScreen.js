@@ -52,6 +52,20 @@ class AddSongScreen extends React.Component {
             console.log(result);
         });
     }
+
+    chordsDidChange(text) {
+        // save raw cords
+        this.setState({ song: { ...this.state.song, chords: text }})
+
+        // extract the progression
+        const newProgression = Song.getProgression(text);
+        this.setState({
+            song: {
+                ...this.state.song,
+                progression: newProgression
+            }
+        })
+    }
     
     render() {
         return (
@@ -74,7 +88,7 @@ class AddSongScreen extends React.Component {
                 <Text style={styles.inputFieldLabel}>Chords</Text>
                 <TextInput multiline style={[styles.inputField, 
                     { padding: 10, height: 250, textAlign: 'left', textAlignVertical: 'top'}]}
-                    onChangeText={ (text) => this.setState({ song: { ...this.state.song, chords: text }})}>
+                    onChangeText={ (text) => this.chordsDidChange(text)}>
                         {this.state.song.chords}
                     </TextInput>
 
