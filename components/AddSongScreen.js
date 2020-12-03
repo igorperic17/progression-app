@@ -18,7 +18,10 @@ class AddSongScreen extends React.Component {
     constructor({ navigator }) {
         super();
         this.state = { 
-            song: new Song({id: '1', title: '', artist: '', chords: '', progression: ''})
+            song: new Song({id: '1', title: '', artist: '', chords: '', progression: ''}),
+            titleValid: true,
+            artistValid: true,
+            chordsValid: true
         };
         
         this.client = new ApolloClient({
@@ -35,6 +38,17 @@ class AddSongScreen extends React.Component {
     }
 
     onOKPress(song) {
+
+        this.setState({
+            artistValid: this.validateText(this.state.song.artist),
+            chordsValid: this.validateText(this.state.song.chords),
+            titleValid: this.validateText(this.state.song.title)
+        });
+
+        if (!this.state.titleValid || !this.state.chordsValid || !this.state.artistValid) {
+            console.log("FILLLLL THE FOOOOOOOORM");
+        }
+
         console.log("Adding a song")
         console.log(song);
     
@@ -53,9 +67,26 @@ class AddSongScreen extends React.Component {
         });
     }
 
+    titleDidChange(text) {
+        this.setState({ 
+            song: { ...this.state.song, title: text },
+            titleValid: this.validateText(text)
+        });
+    }
+
+    artistDidChange(text) {
+        this.setState({ 
+            song: { ...this.state.song, artist: text },
+            artistValid: this.validateText(text)
+        });
+    }
+
     chordsDidChange(text) {
         // save raw cords
-        this.setState({ song: { ...this.state.song, chords: text }})
+        this.setState({
+            song: { ...this.state.song, chords: text },
+            chordsValid: this.validateText(text)
+        });
 
         // extract the progression
         const newProgression = Song.getProgression(text);
@@ -66,6 +97,11 @@ class AddSongScreen extends React.Component {
             }
         })
     }
+
+    validateText(text) {
+        if (text.length == 0) return false;
+        return true;
+    }
     
     render() {
         return (
@@ -75,20 +111,23 @@ class AddSongScreen extends React.Component {
                 <SongListScreenCell item={this.state.song} cellStyle={styles.headerCell}></SongListScreenCell>
 
                 <Text style={styles.inputFieldLabel}>Song title</Text>
-                <TextInput style={styles.inputField} 
-                onChangeText={ (text) => this.setState({ song: { ...this.state.song, title: text }})}>
+                <TextInput style={[ styles.inputField,
+                    this.state.titleValid ? styles.inputFieldValidationNoError : styles.inputFieldValidationError]}
+                onChangeText={ (text) => this.titleDidChange(text) }>
                     {this.state.song.title}</TextInput>
 
                 <Text style={styles.inputFieldLabel}>Artist name</Text>
-                <TextInput style={styles.inputField}
-                onChangeText={ (text) => this.setState({ song: { ...this.state.song, artist: text }})}>
+                <TextInput style={[styles.inputField,
+                                    this.state.artistValid ? styles.inputFieldValidationNoError : styles.inputFieldValidationError]}
+                onChangeText={ (text) => this.artistDidChange(text) }>
                     {this.state.song.artist}</TextInput>
                
 
                 <Text style={styles.inputFieldLabel}>Chords</Text>
                 <TextInput multiline style={[styles.inputField, 
-                    { padding: 10, height: 250, textAlign: 'left', textAlignVertical: 'top'}]}
-                    onChangeText={ (text) => this.chordsDidChange(text)}>
+                    { padding: 10, height: 250, textAlign: 'left', textAlignVertical: 'top'},
+                    this.state.chordsValid ? styles.inputFieldValidationNoError : styles.inputFieldValidationError]}
+                    onChangeText={ (text) => this.chordsDidChange(text) }>
                         {this.state.song.chords}
                     </TextInput>
 
@@ -154,6 +193,14 @@ const styles = StyleSheet.create({
         height: 40,
         fontWeight: 'bold',
         color: GlobalColors.darkBlue
+    },
+    inputFieldValidationNoError: {
+        color: GlobalColors.darkBlue,
+        borderColor: GlobalColors.lightBlue
+    },
+    inputFieldValidationError: {
+        borderColor: 'red',
+        color: 'red'
     },
     buttonRow: {
         // flex: 1,
