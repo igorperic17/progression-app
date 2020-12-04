@@ -10,10 +10,12 @@ import { navigationRef } from './NavigationRoot';
 import { GlobalColors } from '../styles/global.styles'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 class AddSongScreen extends React.Component {
+    state: { song: Song; titleValid: boolean; artistValid: boolean; chordsValid: boolean; };
+    client: ApolloClient<NormalizedCacheObject>;
 
     constructor({ navigator }) {
         super();

@@ -21,7 +21,7 @@ export default class App extends Component {
     super(props);
     this.currentSong = {
       title: 'Test',
-      chords: 'test',
+      chords: 'test123',
       progression: 'A,B,C',
       artist: 'igor'
     };
