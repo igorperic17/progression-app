@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { Animated, View, Easing, Image, StyleSheet, TouchableHighlight } from 'react-native';
 // import Animated from 'react-native-reanimated';
 import BottomBarNavigationButton from './BottomBarNavigationButton'
-import { BottomBarNavigationButtonDelegate, BottomBarNavigationButtonProps, BottomBarNavigationProps } from './NavigationParamTypes';
+import { BottomBarNavigationButtonDelegate, BottomBarNavigationButtonProps, BottomBarNavigationProps, BottomBarNavigationState } from './NavigationParamTypes';
 
 import * as NavigationRoot from './NavigationRoot';
 
-export default class BottomBarNavigation extends React.Component<BottomBarNavigationProps, BottomBarNavigationButtonDelegate> {
+export default class BottomBarNavigation extends React.Component<BottomBarNavigationProps, BottomBarNavigationState, BottomBarNavigationButtonDelegate> {
     highlightCircleRef: React.RefObject<View>;
     highlightPosition: Animated.Value;
 
@@ -29,9 +29,9 @@ export default class BottomBarNavigation extends React.Component<BottomBarNaviga
 
     componentDidUpdate(prevProps: BottomBarNavigationProps) {
         console.log("UPDATEEEE")
-        if (this.state.currentIndex !== prevProps.currentIndex) {
+        // if (this.state.currentIndex !== prevProps.currentIndex) {
             this.onPageChange(this.state.currentIndex);
-        }
+        // }
     }
 
     onPageChange(newPageIndex: number) {

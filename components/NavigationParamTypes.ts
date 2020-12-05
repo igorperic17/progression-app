@@ -22,25 +22,29 @@ export type SongScreenProps = {
 
 // BottomBarNavigation
 
-export type BottomBarNavigationDelegate = {
+export interface BottomBarNavigationDelegate {
     didPressNavigationButton: (index: number) => void
 }
 
 export type BottomBarNavigationProps = {
     currentIndex: number,
     delegate: BottomBarNavigationDelegate,
-    style: ViewStyle
+    style?: ViewStyle
 }
 
 // BottomBarNavigationButton
 
-export type BottomBarNavigationButtonDelegate = {
+export interface BottomBarNavigationState {
+    currentIndex: number
+}
+
+export interface BottomBarNavigationButtonDelegate {
     navigationButtonPressed: (index: number) => void
 }
 
 export type BottomBarNavigationButtonProps = {
     index: number,
-    // style: any | undefined,
+    style?: any,
     image: ImageSourcePropType,
     delegate: BottomBarNavigationButtonDelegate
 }

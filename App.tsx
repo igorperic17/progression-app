@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, LegacyRef, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,6 +19,7 @@ const { Navigator, Screen } = createStackNavigator<NavigationParamTypes>();
 
 export default class App extends Component {
   currentSong: Song;
+  navBar: LegacyRef<BottomBarNavigation>;
 
   constructor(props: any) {
     super(props);
@@ -57,7 +58,7 @@ export default class App extends Component {
       </NavigationContainer>
 
         <View style={styles.bottomBarContainer}>
-          <BottomBarNavigation ref={this.navBar} style={styles.bottomBar} delegate={this}></BottomBarNavigation>
+          <BottomBarNavigation ref={this.navBar} delegate={this} currentIndex={2}></BottomBarNavigation>
         </View>
       </>
     )
