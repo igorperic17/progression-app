@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native';
 
-export default function LogoImage({ route }) {
+export default function LogoImage() {
     return (
         <View style={styles.container}>
             <Image source={require('../media/logo.png')} style={styles.logo}></Image>

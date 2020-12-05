@@ -2,9 +2,13 @@
 const allChords = ['C', 'Cm', 'D', 'Dm', 'E', 'Em', 'F', 'Fm'];
 
 export default class Song {
+    title: String;
+    artist: String;
+    chords: String;
+    progression: String;
+    id: String;
 
-
-    constructor({id, title, artist, chords, progression}) {
+    constructor(id: String, title: String, artist: String, chords: String, progression: String) {
         this.title = title;
         this.artist = artist;
         this.chords = chords;
@@ -12,11 +16,11 @@ export default class Song {
         this.id = id;
     }
 
-    static getProgression(song) {
+    static getProgression(song: string) {
 
         console.log(song);
         var extractedChords = [];
-        for (chord in allChords) {
+        for (const chord in allChords) {
             // console.log(chord);
             const template = ' ' + allChords[chord] + ' ';
             const searchResult = song.search(template);
@@ -30,10 +34,10 @@ export default class Song {
                 extractedChords.push(allChords[chord]);
             }
         }
-        extractedChords = extractedChords.join(',');
+        const extractedChordsJoined = extractedChords.join(',');
         console.log('Extracted chords');
-        console.log(extractedChords);
-        return extractedChords;
+        console.log(extractedChordsJoined);
+        return extractedChordsJoined;
 
     }
 

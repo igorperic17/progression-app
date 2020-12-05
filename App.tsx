@@ -12,24 +12,21 @@ import BottomBarNavigation from './components/BottomBarNavigation';
 
 import { navigationRef, isReadyRef } from './components/NavigationRoot';
 import * as NavigationRoot from './components/NavigationRoot';
+import Song from './data/Song';
+import { NavigationParamTypes } from './components/NavigationParamTypes';
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator<NavigationParamTypes>();
 
 export default class App extends Component {
+  currentSong: Song;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
-    this.currentSong = {
-      title: 'Test',
-      chords: 'test123',
-      progression: 'A,B,C',
-      artist: 'igor'
-    };
+    this.currentSong = new Song( "1", 'Test',  'test', 'A,B,C', 'igor' );
     isReadyRef.current = false;
-    
   };
 
-  didPressNavigationButton(index) {
+  didPressNavigationButton(index: number) {
 
     // skip navigation if it is not mounted already
     if (!navigationRef.current || !isReadyRef.current) return;

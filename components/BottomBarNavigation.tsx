@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import { Animated, View, Easing, Image, StyleSheet, TouchableHighlight } from 'react-native';
 // import Animated from 'react-native-reanimated';
 import BottomBarNavigationButton from './BottomBarNavigationButton'
+import { BottomBarNavigationButtonDelegate, BottomBarNavigationButtonProps, BottomBarNavigationProps } from './NavigationParamTypes';
 
 import * as NavigationRoot from './NavigationRoot';
 
-export default class BottomBarNavigation extends React.Component {
+export default class BottomBarNavigation extends React.Component<BottomBarNavigationProps, BottomBarNavigationButtonDelegate> {
+    highlightCircleRef: React.RefObject<View>;
+    highlightPosition: Animated.Value;
 
-    constructor(props) {
+    constructor(props: BottomBarNavigationProps) {
         super(props);
         this.highlightCircleRef = React.createRef();
         this.highlightPosition = new Animated.Value(0)
@@ -16,7 +19,7 @@ export default class BottomBarNavigation extends React.Component {
         }
     }
 
-    navigationButtonPressed(index) {
+    navigationButtonPressed(index: number) {
         if (index === this.state.currentIndex) return;
         this.setState({ currentIndex: index });
 
@@ -24,14 +27,14 @@ export default class BottomBarNavigation extends React.Component {
         this.props.delegate?.didPressNavigationButton(index);
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps: BottomBarNavigationProps) {
         console.log("UPDATEEEE")
-        // if (this.currentIndex !== prevProps.currentIndex) {
+        if (this.state.currentIndex !== prevProps.currentIndex) {
             this.onPageChange(this.state.currentIndex);
-        // }
+        }
     }
 
-    onPageChange(newPageIndex) {
+    onPageChange(newPageIndex: number) {
         Animated.timing(this.highlightPosition, {
             toValue: (newPageIndex - 1) * 57,
             duration: 300,
@@ -64,10 +67,10 @@ export default class BottomBarNavigation extends React.Component {
                 </Animated.View>
                     
                 <View style={[styles.navigationBar, this.props.style]}> 
-                    <BottomBarNavigationButton index="1" text='' image={require('../assets/navbar-play.png')} delegate={this}/>
-                    <BottomBarNavigationButton index="2" text='' image={require('../assets/navbar-edit.png')} delegate={this}/>
-                    <BottomBarNavigationButton index="3" text='' image={require('../assets/navbar-list.png')} delegate={this}/>
-                    <BottomBarNavigationButton index="4" text='' image={require('../assets/navbar-settings.png')} delegate={this}/>
+                    <BottomBarNavigationButton index={1} image={require('../assets/navbar-play.png')} delegate={this}/>
+                    <BottomBarNavigationButton index={2} image={require('../assets/navbar-edit.png')} delegate={this}/>
+                    <BottomBarNavigationButton index={3} image={require('../assets/navbar-list.png')} delegate={this}/>
+                    <BottomBarNavigationButton index={4} image={require('../assets/navbar-settings.png')} delegate={this}/>
                 </View>
             </View>
         );

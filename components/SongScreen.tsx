@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, ScrollView, TouchableHighlight, Image} from 'react-native'
-import LogoImage from '../components/LogoImage'
+import LogoImage from './LogoImage'
+import { SongScreenProps } from './NavigationParamTypes'
 
-function SongScreen({ route }) {
-    const { songObject } = route.params;
+function SongScreen({ route }: SongScreenProps ) {
+    const songObject = route.params.song
     return (
         <View style={styles.container}>
             <Text style={styles.songTitle}>{songObject.title}</Text>

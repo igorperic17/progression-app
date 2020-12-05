@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Image, TouchableHighlight, Text, StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import { BottomBarNavigationButtonDelegate, BottomBarNavigationButtonProps } from './NavigationParamTypes';
 
-export default class BottomBarNavigationButton extends React.Component {
+export default class BottomBarNavigationButton extends React.Component<BottomBarNavigationButtonProps, BottomBarNavigationButtonDelegate> {
 
     render() {
         return (
@@ -12,7 +13,6 @@ export default class BottomBarNavigationButton extends React.Component {
                 onPress={() => this.props.delegate.navigationButtonPressed(this.props.index)}>
                 <View style={styles.buttonImage}>
                     <Image source={this.props.image}></Image>
-                    {/* <Text style={{color: 'white'}}>{this.props.text}</Text> */}
                 </View>
             </TouchableHighlight>
         );

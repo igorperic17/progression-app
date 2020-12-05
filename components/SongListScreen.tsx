@@ -1,18 +1,20 @@
 import React from 'react';
 import { View, LayoutAnimation, StyleSheet, TouchableHighlight, Image, Text } from 'react-native';
-import { SwipeListView } from 'react-native-swipe-list-view';
+import { SwipeListView, RowMap, SwipeRow } from 'react-native-swipe-list-view';
 
 import SongListScreenCell from './SongListScreenCell'
 import LogoImage from './LogoImage'
 
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { gql } from '@apollo/client';
+import Song from '../data/Song';
 
 class SongListScreen extends React.Component {
+    client: ApolloClient<NormalizedCacheObject>;
 
-    constructor() {
-        super();
-        this.state = { };
+    constructor(props: any) {
+        super(props);
+        this.state = { chords: [] }
         this.client = new ApolloClient({
             uri: 'http://localhost:3000/graphql',
             cache: new InMemoryCache()
@@ -45,13 +47,13 @@ class SongListScreen extends React.Component {
         });
     };
 
-    closeRow = (rowMap, rowKey) => {
+    closeRow = (rowMap: RowMap<SwipeRow<Song>>, rowKey: string) => {
         if (rowMap[rowKey]) {
             rowMap[rowKey].closeRow();
         }
     };
 
-    editRow(rowMap, key) {
+    editRow(rowMap: RowMap<SwipeRow<Song>>, key: string) {
         console.log('Delete pressed on ');
         console.log(rowMap);
         console.log(key);
@@ -59,7 +61,7 @@ class SongListScreen extends React.Component {
         this.closeRow(rowMap, key);
     };
 
-    deleteRow(rowMap, key) {
+    deleteRow(rowMap: RowMap<SwipeRow<Song>>, key: string) {
         console.log('Deleting song');
         console.log(this.state.chords[key]);
 
@@ -116,7 +118,7 @@ class SongListScreen extends React.Component {
                     <SongListScreenCell item={listItem.item} 
                         onPress={() => { 
                             this.props.navigation.navigate("SongScreen", 
-                            { songObject: listItem.item })}} />
+                            { song: listItem.item })}} />
                 )}}
                 renderHiddenItem={this.renderHiddenItem}
                 leftOpenValue={0}
