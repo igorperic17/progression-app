@@ -2,13 +2,13 @@
 const allChords = ['C', 'Cm', 'D', 'Dm', 'E', 'Em', 'F', 'Fm'];
 
 export default class Song {
-    title: String;
-    artist: String;
-    chords: String;
-    progression: String;
-    id: String;
+    title: string;
+    artist: string;
+    chords: string;
+    progression: string;
+    id: string;
 
-    constructor(id: String, title: String, artist: String, chords: String, progression: String) {
+    constructor(id: string, title: string, artist: string, chords: string, progression: string) {
         this.title = title;
         this.artist = artist;
         this.chords = chords;

@@ -19,6 +19,11 @@ export type SongScreenProps = {
     navigation: SongScreenNavigationProp
 }
 
+export type SongListScreenCellProps = {
+    cellStyle: ViewStyle,
+    item: Song,
+    onPress: (event: GestureResponderEvent) => void
+}
 
 // BottomBarNavigation
 

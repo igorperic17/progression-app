@@ -1,7 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { SongListScreenCellProps } from './NavigationParamTypes';
 
-export default function SongListScreenCell({cellStyle, item, onPress }) {
+export default function SongListScreenCell({cellStyle, item, onPress }: SongListScreenCellProps) {
 
     function getChordViews() {
         var a = item.progression;
